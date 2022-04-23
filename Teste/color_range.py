@@ -29,7 +29,8 @@ hMin = sMin = vMin = hMax = sMax = vMax = 0
 phMin = psMin = pvMin = phMax = psMax = pvMax = 0
 
 while (1):
-    _, image = cv2.VideoCapture(0).read()
+    image = cv2.imread('image.jpg')
+    # _, image = cv2.VideoCapture(0).read()
     # Get current positions of all trackbars
     hMin = cv2.getTrackbarPos('HMin', 'image')
     sMin = cv2.getTrackbarPos('SMin', 'image')
