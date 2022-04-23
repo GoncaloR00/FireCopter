@@ -7,9 +7,10 @@ def nothing(x):
     pass
 
 
+# Get image and resize
+image = cv2.resize(cv2.imread('image.jpg'), (450, 450))
 # Create a window
 cv2.namedWindow('image')
-
 # Create trackbars for color change
 # Hue is from 0-179 for Opencv
 cv2.createTrackbar('HMin', 'image', 0, 179, nothing)
@@ -29,7 +30,6 @@ hMin = sMin = vMin = hMax = sMax = vMax = 0
 phMin = psMin = pvMin = phMax = psMax = pvMax = 0
 
 while (1):
-    image = cv2.imread('image.jpg')
     # _, image = cv2.VideoCapture(0).read()
     # Get current positions of all trackbars
     hMin = cv2.getTrackbarPos('HMin', 'image')
@@ -51,7 +51,7 @@ while (1):
     # Print if there is a change in HSV value
     if ((phMin != hMin) | (psMin != sMin) | (pvMin != vMin) | (phMax != hMax) | (psMax != sMax) | (pvMax != vMax)):
         print("(hMin = %d , sMin = %d, vMin = %d), (hMax = %d , sMax = %d, vMax = %d)" % (
-        hMin, sMin, vMin, hMax, sMax, vMax))
+            hMin, sMin, vMin, hMax, sMax, vMax))
         phMin = hMin
         psMin = sMin
         pvMin = vMin
