@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import time
-from Server.GamePad.ClassGamePad import ClassGamePad
+from ControlTower.GamePad.ClassGamePad import ClassGamePad
 
 # -----------------------------------------
 # Initialization
@@ -21,4 +21,4 @@ while True:
 # -----------------------------------------
 # Termination
 # -----------------------------------------
-game_pad.disconnect()
+game_pad.stop()
