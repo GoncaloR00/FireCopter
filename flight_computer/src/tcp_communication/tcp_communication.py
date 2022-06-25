@@ -27,7 +27,7 @@ pub = rospy.Publisher(topic_MessageToSend, TYPR, queue_size=1)
 # Server
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.bind((host, port))
-server.listen(1)
+server.listen(2)
 
 
 # -----------------------------------------
@@ -43,6 +43,7 @@ def handle(client):
             if not message:
                 print('HELP')
                 # TODO meter led de alerta
+                client.close
                 break
             decoded = pickle.loads(message)
             (throttle, yaw, pitch, roll, start, stop, sos, mode) = decoded
@@ -56,7 +57,7 @@ def handle(client):
             msg.sos = bool(sos)
             msg.mode = bool(mode)
             pub.publish(msg)
-            time.sleep(0.01)
+            time.sleep(0.05)
 
         except Exception as e:
             print('Error: ', e)
@@ -80,7 +81,7 @@ def main():
     # ---------------------------------------------------
     rospy.init_node('TCP_Receiver', anonymous=False)
     receive()
-    # rospy.spin()
+    rospy.spin()
 
 
 if __name__ == '__main__':

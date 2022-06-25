@@ -56,6 +56,9 @@ def write():
             time.sleep(0.05)
         except Exception as e:
             print('Error: ', e)
+            client.close()
+            # client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            client.connect((ip_address, port))
 
 
 # -----------------------------------------
