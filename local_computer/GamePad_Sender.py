@@ -3,6 +3,8 @@
 import socket
 import threading
 import pickle
+import time
+
 from ClassGamePad import ClassGamePad
 import numpy
 
@@ -12,7 +14,7 @@ import numpy
 # -----------------------------------------
 
 # Connection
-ip_address = socket.gethostname()
+ip_address = '192.168.1.213'
 port = 2022
 
 
@@ -41,6 +43,7 @@ def write():
         yaw = round(numpy.interp(yaw_joystick, [-1, 1], [-100, 100]))
         pitch = round(numpy.interp(pitch_joystick, [-1, 1], [100, -100]))
         roll = round(numpy.interp(roll_joystick, [-1, 1], [-100, 100]))
+        print(type(roll))
         start = game_pad.btnA
         sos = game_pad.btnB
         stop = game_pad.btnY
@@ -50,9 +53,9 @@ def write():
             print(msg)
             print(len(msg))
             client.send(msg)
+            time.sleep(0.05)
         except Exception as e:
             print('Error: ', e)
-            # TODO meter a acender led de aviso
 
 
 # -----------------------------------------
