@@ -8,6 +8,18 @@ import time
 from ClassGamePad import ClassGamePad
 import numpy
 
+# -----------------------------------------
+# Commands to send
+# -----------------------------------------
+# Throttle
+# Yaw
+# Pitch
+# Roll
+# Start - Enable Joysticks
+# Stop - Disable Joysticks
+# Arm - Enable Motors (press 3 seconds)
+# SOS - Disable motors (press 3 seconds)
+# Mode - Change auto to manual mode and vice-versa
 
 # -----------------------------------------
 # Parameters
