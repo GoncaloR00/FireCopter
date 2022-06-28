@@ -3,7 +3,6 @@ import time
 
 import rospy
 import serial
-# from std_msgs.msg import String
 from flight_computer.msg import TYPR
 
 # ---------------------------------------------------
@@ -17,7 +16,7 @@ topic_MessageToSend = '/serial/toSend'
 def callback(msg):
     message = ''
     message = str(msg.throttle) + ',' + str(msg.yaw) + ',' + str(msg.pitch) + ',' + \
-              str(msg.roll) + ',' + "\n"
+              str(msg.roll) + ',' + str(msg.arm) + ',' + str(msg.sos) + ',' + "\n"
     print(message)
     ser.write(message.encode('utf-8'))
     # ser.read(10)

@@ -4,5 +4,6 @@ int8 pitch
 int8 roll
 bool start
 bool stop
-bool sos
+int8 arm
+int8 sos
 bool mode

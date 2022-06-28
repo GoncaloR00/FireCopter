@@ -39,14 +39,14 @@ def handle(client):
     while True:
         # print('ok')
         try:
-            message = client.recv(200)
+            message = client.recv(220)
             if not message:
                 print('HELP')
                 # TODO meter led de alerta
                 client.close
                 break
             decoded = pickle.loads(message)
-            (throttle, yaw, pitch, roll, start, stop, sos, mode) = decoded
+            (throttle, yaw, pitch, roll, start, stop, arm, sos, mode) = decoded
             msg = TYPR()
             msg.throttle = throttle
             msg.yaw = yaw
@@ -54,7 +54,8 @@ def handle(client):
             msg.roll = roll
             msg.start = bool(start)
             msg.stop = bool(stop)
-            msg.sos = bool(sos)
+            msg.arm = arm
+            msg.sos = sos
             msg.mode = bool(mode)
             pub.publish(msg)
             time.sleep(0.05)

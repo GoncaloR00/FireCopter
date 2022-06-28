@@ -58,10 +58,11 @@ def write():
         print(type(roll))
         start = game_pad.btnA
         sos = game_pad.btnB
+        arm = game_pad.btnX
         stop = game_pad.btnY
         mode = game_pad.btnRB
         try:
-            msg = pickle.dumps((throttle, yaw, pitch, roll, start, stop, sos, mode))
+            msg = pickle.dumps((throttle, yaw, pitch, roll, start, stop, arm, sos, mode))
             print(msg)
             print(len(msg))
             client.send(msg)
