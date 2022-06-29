@@ -15,7 +15,6 @@ from flight_computer.msg import TYPR
 host = socket.gethostname()
 port = 2022
 
-
 # -----------------------------------------
 # Initialization
 # -----------------------------------------
@@ -36,9 +35,10 @@ server.listen(2)
 
 # Handling Messages From Clients and sending to the respective topics
 def handle(client):
+    # try:
     while True:
-        # print('ok')
         try:
+            print('ok')
             message = client.recv(220)
             if not message:
                 print('HELP')
@@ -58,15 +58,19 @@ def handle(client):
             msg.sos = sos
             msg.mode = bool(mode)
             pub.publish(msg)
+            print('pub')
             time.sleep(0.05)
-
         except Exception as e:
             print('Error: ', e)
+    # except KeyboardInterrupt:
+    #     pass
 
 
 # Receiving / Listening Function
 def receive():
+    # try:
     while True:
+        # print('check')
         # Accept Connection
         client, address = server.accept()
         print("Connected with {}".format(str(address)))
@@ -74,6 +78,13 @@ def receive():
         # Start Handling Thread For Client
         thread = threading.Thread(target=handle, args=(client,))
         thread.start()
+        # thread.join()
+        # if KeyboardInterrupt:
+        #     thread.exit()
+        #     break
+
+    # except KeyboardInterrupt:
+    #     pass
 
 
 def main():
@@ -81,7 +92,10 @@ def main():
     #   Initialization
     # ---------------------------------------------------
     rospy.init_node('TCP_Receiver', anonymous=False)
-    receive()
+    try:
+        receive()
+    except KeyboardInterrupt:
+        pass
     rospy.spin()
 
 
@@ -91,4 +105,3 @@ if __name__ == '__main__':
         main()
     except rospy.ROSInterruptException:
         print(rospy.ROSInterruptException)
-

@@ -1,0 +1,6 @@
+<launch>
+    <node name = "TCP_Receiver" pkg="flight_computer" type="tcp_communication.py" />
+<!--    </node>-->
+    <node name = "serial_comunicatiom" pkg="flight_computer" type="serial_communication.py" />
+<!--    </node>-->
+</launch>
