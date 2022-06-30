@@ -92,10 +92,10 @@ def main():
     #   Initialization
     # ---------------------------------------------------
     rospy.init_node('TCP_Receiver', anonymous=False)
-    try:
-        receive()
-    except KeyboardInterrupt:
-        pass
+    # try:
+    receive()
+    # except KeyboardInterrupt:
+    #     pass
     rospy.spin()
 
 

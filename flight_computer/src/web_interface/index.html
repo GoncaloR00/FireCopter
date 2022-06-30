@@ -26,40 +26,25 @@
             console.log('Connection to websocket server closed');
         });
 
-        // Publishing a Topic
+        //Define topics to subscribe
+        var goalcommands = new ROSLIB.Topic({
+        ros : ros,
+        name : '/serial/toSend',
+        messageType : 'flight_computer/TYPR'})
 
-        var cmdVel = new ROSLIB.Topic({
-            ros : ros,
-            name : '/cmd_vel',
-            messageType : 'geometry_msgs/Twist'
-        });
+        var realangles = new ROSLIB.Topic({
+        ros : ros,
+        name : '/realAngles',
+        messageType : 'flight_computer/SensorData'})
 
-        var twist = new ROSLIB.Message({
-            linear : {
-            x : 0.1,
-            y : 0.2,
-            z : 0.3
-            },
-            angular : {
-            x : -0.1,
-            y : -0.2,
-            z : -0.3
-            }
-        });
-        cmdVel.publish(twist);
-
-        cmdVel.publish(twist);
-
-        // Subscribing to a topic
-        var listener = new ROSLIB.Topic({
-            ros : ros,
-            name : '/listener',
-            messageType : 'std_msgs/String'
-        });
-
-        listener.subscribe(function(message) {
-            console.log('Received message on ' + listener.name + ': ' + message.data);
-            listener.unsubscribe();
+        // Subscribing a Topic
+        goalcommands.subscribe(function(message) {
+            document.getElementById('goal_throttle').innerHTML = message.throttle;
+            document.getElementById('goal_yaw').innerHTML = message.yaw;
+            document.getElementById('goal_pitch').innerHTML = message.pitch;
+            document.getElementById('goal_roll').innerHTML = message.roll;
+            document.getElementById('ciclo').innerHTML = message.mode;
+            goalcommands.unsubscribe();
         });
 
 
@@ -67,16 +52,15 @@
 
 </head>
 <body>
-    <h1>Introduction to roslibjs</h1>
-    <p>Open this html file in the browser, Run the following command and check your Web console for ouput after each command is given</p>
-    <p>1. roslaunch rosbridge_server rosbridge_websocket.launch</p>
-    <p>check the console output on your browser</p>
-    <br>
-    <p>2. rostopic pub /listener std_msgs/String "Hello, World"</p>
-    <p>check the console output on your browser</p>
-    <br>
-    <p>3. rostopic echo /cmd_vel</p>
-    <p>refresh the browser and check the output on your ternimal</p>
+    <h1>Interface do FireCopter</h1>
+    <h2>Comandos enviados para o drone</h2>
+    <a>Throttle: </a><a id="goal_throttle">throttle</a><a>%</a><br>
+    <a>Yaw: </a><a id="goal_yaw">yaw</a><a>%</a><br>
+    <a>Pitch: </a><a id="goal_pitch">pitch</a><a>%</a><br>
+    <a>Roll: </a><a id="goal_roll">roll</a><a>%</a><br>
+    <h2>Dados dos Sensores</h2>
+<!--    <img src="teste.png" alt="Girl in a jacket" width="500" height="600">-->
+<!--    <img src="teste.png" alt="Girl in a jacket" width="500" height="600">-->
 
 </body>
 </html>
