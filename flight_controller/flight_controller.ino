@@ -14,6 +14,8 @@ Servo R_B_prop;
 //Variaveis de tempo
 float elapsedTime, time, timePrev;
 
+//float anglex = 0;
+//float angley = 0;
 //Variaveis para o giroscopio
 int gyro_error=0;                         //We use this variable to only calculate once the gyro data error
 float Gyr_rawX, Gyr_rawY, Gyr_rawZ;       //Here we store the raw data read 
@@ -370,18 +372,20 @@ yaw = input_YAW;
 throttle = input_THROTTLE;
 
 
-  Serial.print("Throttle: ");
-  Serial.print(input_THROTTLE);
-  Serial.print(" Yaw: ");
-  Serial.print(input_YAW);
-  Serial.print(" Pitch: ");
-  Serial.print(input_PITCH);
-  Serial.print(" Roll: ");
-  Serial.print(input_ROLL);
-  Serial.print(" X ang: ");
-  Serial.print(Total_angle_x);
-  Serial.print(" Y ang: ");
-  Serial.println(Total_angle_y);
+//  Serial.print("Throttle: ");
+//  Serial.print(input_THROTTLE);
+//  Serial.print(" Yaw: ");
+//  Serial.print(input_YAW);
+//  Serial.print(" Pitch: ");
+//  Serial.print(input_PITCH);
+//  Serial.print(" Roll: ");
+//  Serial.print(input_ROLL);
+//  Serial.print("X ang:");
+//  anglex = Total_angle_x * 100;
+//  angley = Total_angle_x * 100;
+  Serial.print(String(Total_angle_x));
+  Serial.print(",");
+  Serial.println(String(Total_angle_y));
   // PID TEMPORARIO
 //  throttle = input_THROTTLE;
 //  yaw = input_YAW;

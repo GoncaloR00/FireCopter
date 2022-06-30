@@ -34,7 +34,7 @@
 
         var realangles = new ROSLIB.Topic({
         ros : ros,
-        name : '/realAngles',
+        name : '/serial/recieved',
         messageType : 'flight_computer/SensorData'})
 
         // Subscribing a Topic
@@ -45,6 +45,12 @@
             document.getElementById('goal_roll').innerHTML = message.roll;
             document.getElementById('ciclo').innerHTML = message.mode;
             goalcommands.unsubscribe();
+        });
+        realangles.subscribe(function(message) {
+            document.getElementById('anglex').innerHTML = message.x_angle;
+            document.getElementById('angley').innerHTML = message.y_angle;
+            document.getElementById('ciclo2').innerHTML = message.z_angle;
+            realangles.unsubscribe();
         });
 
 
@@ -59,6 +65,8 @@
     <a>Pitch: </a><a id="goal_pitch">pitch</a><a>%</a><br>
     <a>Roll: </a><a id="goal_roll">roll</a><a>%</a><br>
     <h2>Dados dos Sensores</h2>
+    <a>Ângulo X: </a><a id="anglex">x</a><br>
+    <a>Ângulo Y: </a><a id="angley">y</a><br>
 <!--    <img src="teste.png" alt="Girl in a jacket" width="500" height="600">-->
 <!--    <img src="teste.png" alt="Girl in a jacket" width="500" height="600">-->
 
