@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>roslibjs introduction</title>
+    <title>FireCopter</title>
 
     <script type="text/javascript" src="eventemitter2.min.js"></script>
     <script type="text/javascript" src="roslib.min.js"></script>
@@ -26,6 +26,7 @@
             console.log('Connection to websocket server closed');
         });
 
+
         //Define topics to subscribe
         var goalcommands = new ROSLIB.Topic({
         ros : ros,
@@ -46,6 +47,18 @@
         ros : ros,
         name : '/image/fire',
         messageType : 'sensor_msgs/CompressedImage'})
+
+        var firemask = new ROSLIB.Topic({
+        ros : ros,
+        name : '/image/mask',
+        messageType : 'sensor_msgs/CompressedImage'})
+
+
+        var set_hsv = new ROSLIB.Topic({
+        ros : ros,
+        name : '/image/hsv',
+        messageType : 'flight_computer/hsv'
+        });
 
         // Subscribing a Topic
         goalcommands.subscribe(function(message) {
@@ -69,9 +82,23 @@
             fireimage.subscribe(function(message) {
             document.getElementById('imagemfogo').src = "data:image/jpg;base64," + message.data;
             realangles.unsubscribe();
-        });
+            });
+            firemask.subscribe(function(message) {
+            document.getElementById('imagemmascara').src = "data:image/jpg;base64," + message.data;
+            realangles.unsubscribe();
+            });
 
-
+        function hsv_sender() {
+            var hsv = new ROSLIB.Message({
+                hmin: document.getElementById('hmin').value,
+                smin: document.getElementById('smin').value,
+                vmin: document.getElementById('hmin').value,
+                hmax: document.getElementById('hmax').value,
+                smax: document.getElementById('smax').value,
+                vmax: document.getElementById('hmax').value,
+            });
+            set_hsv.publish(hsv);
+        }
     </script>
 
 </head>
@@ -86,8 +113,18 @@
     <a>Ângulo X: </a><a id="anglex">x</a><br>
     <a>Ângulo Y: </a><a id="angley">y</a><br>
     <h2>Ajuste do HSV</h2>
-    <img id="imagemoriginal" alt="Girl in a jacket" width="480" height="360">
-    <img id="imagemfogo" alt="Girl in a jacket" width="480" height="360">
+    <img id="imagemoriginal" alt="Imagem Original" width="480" height="360">
+    <img id="imagemmascara" alt="Mascara" width="480" height="360"><br>
+    <a>H min </a><input type="number" id="hmin" name="quantity" min="0" max="255">
+    <a>  S min </a><input type="number" id="smin" name="quantity" min="0" max="255">
+    <a>  V min </a><input type="number" id="vmin" name="quantity" min="0" max="255"><br>
+        <a>H max </a><input type="number" id="hmax" name="quantity" min="0" max="255">
+    <a>  S max </a><input type="number" id="smax" name="quantity" min="0" max="255">
+    <a>  V max </a><input type="number" id="vmax" name="quantity" min="0" max="255">
+    <input type="submit" onclick="hsv_sender()"><br>
+    <h2>Mancha detetada</h2>
+    <img id="imagemfogo" alt="Incendio detetado" width="480" height="360">
+
 <!--    <img src="teste.png" alt="Girl in a jacket" width="500" height="600">-->
 
 </body>
