@@ -37,6 +37,16 @@
         name : '/serial/recieved',
         messageType : 'flight_computer/SensorData'})
 
+        var originalimage = new ROSLIB.Topic({
+        ros : ros,
+        name : '/image/camera',
+        messageType : 'sensor_msgs/CompressedImage'})
+
+        var fireimage = new ROSLIB.Topic({
+        ros : ros,
+        name : '/image/fire',
+        messageType : 'sensor_msgs/CompressedImage'})
+
         // Subscribing a Topic
         goalcommands.subscribe(function(message) {
             document.getElementById('goal_throttle').innerHTML = message.throttle;
@@ -50,6 +60,14 @@
             document.getElementById('anglex').innerHTML = message.x_angle;
             document.getElementById('angley').innerHTML = message.y_angle;
             document.getElementById('ciclo2').innerHTML = message.z_angle;
+            realangles.unsubscribe();
+        });
+        originalimage.subscribe(function(message) {
+            document.getElementById('imagemoriginal').src = "data:image/jpg;base64," + message.data;
+            realangles.unsubscribe();
+        });
+            fireimage.subscribe(function(message) {
+            document.getElementById('imagemfogo').src = "data:image/jpg;base64," + message.data;
             realangles.unsubscribe();
         });
 
@@ -67,7 +85,9 @@
     <h2>Dados dos Sensores</h2>
     <a>Ângulo X: </a><a id="anglex">x</a><br>
     <a>Ângulo Y: </a><a id="angley">y</a><br>
-<!--    <img src="teste.png" alt="Girl in a jacket" width="500" height="600">-->
+    <h2>Ajuste do HSV</h2>
+    <img id="imagemoriginal" alt="Girl in a jacket" width="480" height="360">
+    <img id="imagemfogo" alt="Girl in a jacket" width="480" height="360">
 <!--    <img src="teste.png" alt="Girl in a jacket" width="500" height="600">-->
 
 </body>

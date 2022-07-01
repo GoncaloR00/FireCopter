@@ -52,6 +52,7 @@ find_package(catkin REQUIRED COMPONENTS
    FILES
    TYPR.msg
    SensorData.msg
+   hsv.msg
  )
 
 ## Generate services in the 'srv' folder

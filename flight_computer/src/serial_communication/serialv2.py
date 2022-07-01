@@ -5,6 +5,7 @@ import serial
 from flight_computer.msg import TYPR
 from flight_computer.msg import SensorData
 
+
 class Serial_communication:
     def __init__(self):
         # ---------------------------------------------------
@@ -26,7 +27,6 @@ class Serial_communication:
         # ---------------------------------------------------
         self.timer = rospy.Timer(rospy.Duration(0.1), self.recieve)
         self.recieved = rospy.Publisher(topic_RecivedMessage, SensorData, queue_size=1)
-
 
     def send(self, msg):
         message = ''
@@ -65,7 +65,7 @@ def main():
     # ---------------------------------------------------
     #   Execution
     # ---------------------------------------------------
-    rate = rospy.Rate(10)
+    rate = rospy.Rate(100)
     rate.sleep()
     rospy.spin()
 
