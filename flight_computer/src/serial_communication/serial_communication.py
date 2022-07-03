@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
-import time
+
+# This is a temporary node! This only exist because we had problems with sending a recieving messages at the same
+# time. This turn out to be a temporary solution to ONLY send info to the flight controller
 
 import rospy
 import serial
@@ -10,38 +12,27 @@ from flight_computer.msg import TYPR
 # ---------------------------------------------------
 ser = serial.Serial('/dev/ttyUSB0', 115200, timeout=1)
 ser.reset_input_buffer()
+
+# ---------------------------------------------------
+#   Topics to subscribe
+# ---------------------------------------------------
 topic_MessageToSend = '/serial/toSend'
-# topic_RecivedMessage = '/serial/recieved'
 
 def callback(msg):
     message = ''
+    # Create a message to send (in a specific format)
     message = str(msg.throttle) + ',' + str(msg.yaw) + ',' + str(msg.pitch) + ',' + \
               str(msg.roll) + ',' + str(msg.arm) + ',' + str(msg.sos) + ',' + "\n"
     print(message)
+    # Send the message
     ser.write(message.encode('utf-8'))
-    # ser.read(10)
-    # ser.timeout = 0.02
 
 def serial_communication():
-    # while True:
-        # line = ser.readline().decode('latin-1').rstrip()
-        # print(line)
-        # ---------------------------------------------------
-        #   Topics to subscribe and subscription
-        # ---------------------------------------------------
+    # ---------------------------------------------------
+    #   Topics subscription and function calling
+    # ---------------------------------------------------
     rospy.Subscriber(topic_MessageToSend, TYPR, callback)
-    # time.sleep(0.1)
-        # ---------------------------------------------------
-        #   Topics to publish and publication
-        # ---------------------------------------------------
-        # pub = rospy.Publisher(topic_RecivedMessage, String, queue_size=1)
-        # ser.read(10)
-        # ser.timeout = 0.02
-        # test = str(ser.readline().decode('latin-1').rstrip())
-        # pub.publish(test)
-        # rate = rospy.Rate(10)
-        # print('ok1')
-    # rospy.spin()
+
 
 
 def main():
@@ -51,7 +42,6 @@ def main():
     rospy.init_node('serial_comunicatiom', anonymous=False)
     serial_communication()
     rospy.spin()
-    # rospy.spin()
 
 
 if __name__ == '__main__':
