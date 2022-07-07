@@ -46,6 +46,7 @@ client.connect((ip_address, port))
 # Sending Messages To Server
 def write():
     while True:
+        # Get gamepad data
         game_pad.getData()
         yaw_joystick = game_pad.LStickLR
         throttle_joystick = game_pad.LStickUD
@@ -61,7 +62,9 @@ def write():
         arm = game_pad.btnX
         stop = game_pad.btnY
         mode = game_pad.btnRB
+        # try to send the data
         try:
+            # Serialize
             msg = pickle.dumps((throttle, yaw, pitch, roll, start, stop, arm, sos, mode))
             print(msg)
             print(len(msg))
@@ -70,7 +73,6 @@ def write():
         except Exception as e:
             print('Error: ', e)
             client.close()
-            # client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             client.connect((ip_address, port))
 
 

@@ -1,11 +1,18 @@
-# FireCopter
-## Como escrever e testar o código - Raspberry
-Para enviar o código para o github convém que este tenha sido testado. Como não há placas para todos trabalharem é necessário recorrer a um emulador. Sugetão: [Tuturial com QEMU](https://azeria-labs.com/emulate-raspberry-pi-with-qemu/).
+<h1 align="center">FireCopter</h1>
+<h2>Índice</h2>
 
-Para programar a raspberry tenho usado o protocolo ssh: Permite programar remotamente e testar na placa ou num simulador
+* [Descrição do Projeto](#Descrição do Projeto)
+* [Hardware](#Hardware)
+* [Organização dos ficheiros de Software](#Organização)
+* [Computador de Voo](#Computador de voo)
+* [Controlador de Voo](#Controlador de voo)
+* [Computador local](#Computador local)
+* [Melhorias necessárias](#Melhorias)
 
- 
-
+# Descrição do Projeto
+# Hardware
+# Organização
+# Computador de voo
 Para ligar ao pycharm é necessário dar permissões de leitura e de escrita à pasta usada na raspberry
 
     sudo chmod 777 FireCopter
@@ -18,3 +25,7 @@ Desta forma é possivel estar a testar o código recorrentemente e se algo corre
 Para comunicar com a placa por ssh e ter acesso às aplicações gráficas (mudar para o ip correto):
 
     sudo ssh -X firecopter@192.168.1.213
+
+# Controlador de voo
+# Computador local
+# Melhorias

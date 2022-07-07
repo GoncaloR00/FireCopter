@@ -14,9 +14,6 @@ Servo R_B_prop;
 //Variaveis de tempo
 float elapsedTime, time, timePrev;
 
-//float anglex = 0;
-//float angley = 0;
-//Variaveis para o giroscopio
 int gyro_error=0;                         //We use this variable to only calculate once the gyro data error
 float Gyr_rawX, Gyr_rawY, Gyr_rawZ;       //Here we store the raw data read 
 float Gyro_angle_x, Gyro_angle_y, Gyro_angle_z;         //Here we store the angle value obtained with Gyro data
@@ -69,18 +66,18 @@ float roll_pid_p=0;
 float roll_pid_i=0;
 float roll_pid_d=0;
 ///////////////////////////////ROLL PID CONSTANTS////////////////////
-double roll_kp=-10;//3.55
+double roll_kp=-3;//3.55
 double roll_ki=0;//0.003
-double roll_kd=0;//2.05
+double roll_kd=0.5;//2.05
 //////////////////////////////PID FOR PITCH//////////////////////////
 float pitch, pitch_error, pitch_previous_error;
 float pitch_pid_p=0;
 float pitch_pid_i=0;
 float pitch_pid_d=0;
 ///////////////////////////////PITCH PID CONSTANTS///////////////////
-double pitch_kp=-10;//3.55
+double pitch_kp=-3;//3.55
 double pitch_ki=0;//0.003
-double pitch_kd=0;//2.05
+double pitch_kd=0.5;//2.05
 float pitch_desired_angle = 0;     //This is the angle in which we whant the
   
 
@@ -400,8 +397,8 @@ throttle = input_THROTTLE;
   if(yaw > 400){yaw = 400;}
   if(pitch < -400){pitch = -400;}
   if(pitch > 400){pitch = 400;}
-  if(roll < -400){yaw = -400;}
-  if(roll > 400){yaw = 400;}
+  if(roll < -400){roll = -400;}
+  if(roll > 400){roll = 400;}
  
   //Obter velocidade de cada motor
   lf_speed = throttle + yaw + pitch + roll;
