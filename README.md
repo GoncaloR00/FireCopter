@@ -1,13 +1,13 @@
 <h1 align="center">FireCopter</h1>
 <h2>Índice</h2>
 
-* [Descrição do Projeto](#Descrição do Projeto)
-* [Hardware](#Hardware)
-* [Organização dos ficheiros de Software](#Organização)
-* [Computador de Voo](#Computador de voo)
-* [Controlador de Voo](#Controlador de voo)
-* [Computador local](#Computador local)
-* [Melhorias necessárias](#Melhorias)
+* [Descrição do Projeto](# Descrição do Projeto)
+* [Hardware](# Hardware)
+* [Organização dos ficheiros de Software](# Organização)
+* [Computador de Voo](# Computador de voo)
+* [Controlador de Voo](# Controlador de voo)
+* [Computador local](# Computador local)
+* [Melhorias necessárias](# Melhorias)
 
 # Descrição do Projeto
 # Hardware
